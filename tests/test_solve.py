@@ -26,6 +26,6 @@ def test_solve(tmp_path: Path):
     print(report_file)
 
 
-def test_solve_repeated(tmp_path: Path):
-    for i in range(20):
-        test_solve(tmp_path)
+#def test_solve_repeated(tmp_path: Path):
+#    for i in range(20):
+#        test_solve(tmp_path)
