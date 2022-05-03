@@ -1,15 +1,11 @@
 import math
 
-import numpy as np
-from shapely.ops import clip_by_rect
-
-from pyroll import Profile, RollPass
-from collections import namedtuple
-
 from shapely import ops
 from shapely.geometry import LineString
 from shapely.affinity import rotate
+from shapely.ops import clip_by_rect
 
+from pyroll import Profile, RollPass
 from pyroll.core.dimensions import Dimensions
 
 
