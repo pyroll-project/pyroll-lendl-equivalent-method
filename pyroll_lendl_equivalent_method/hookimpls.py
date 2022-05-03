@@ -10,6 +10,8 @@ from shapely import ops
 from shapely.geometry import LineString
 from shapely.affinity import rotate
 
+from pyroll.core.dimensions import Dimensions
+
 
 @RollPass.hookimpl
 def in_profile_groove_intersection_points(roll_pass: RollPass):
@@ -100,8 +102,6 @@ def in_equivalent_rectangle(roll_pass: RollPass, profile: Profile):
     eq_width = profile.rotated.width
     eq_height = roll_pass.lendl_initial_area / roll_pass.lendl_width
 
-    Dimensions = namedtuple("Dimensions", ["width", "height"])
-
     return Dimensions(eq_width, eq_height)
 
 
@@ -109,7 +109,5 @@ def in_equivalent_rectangle(roll_pass: RollPass, profile: Profile):
 def out_equivalent_rectangle(roll_pass: RollPass, profile: Profile):
     eq_width = profile.width
     eq_height = roll_pass.lendl_final_area / roll_pass.lendl_width
-
-    Dimensions = namedtuple("Dimensions", ["width", "height"])
 
     return Dimensions(eq_width, eq_height)
