@@ -2,11 +2,6 @@ from pyroll import RollPass
 
 
 @RollPass.hookspec
-def in_profile_groove_intersection_points(roll_pass: RollPass):
-    """Intersection points between the incoming profile and the groove"""
-
-
-@RollPass.hookspec
 def upper_left_intersection_point(roll_pass: RollPass):
     """Upper left intersection point between incoming profile and groove"""
 
@@ -34,6 +29,7 @@ def left_lendl_width_boundary(roll_pass: RollPass):
 @RollPass.hookspec
 def right_lendl_width_boundary(roll_pass: RollPass):
     """Line between the right side intersection points"""
+
 
 @RollPass.hookspec
 def lendl_width(roll_pass: RollPass):

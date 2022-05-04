@@ -3,7 +3,8 @@ name = "pyroll-lendl-equivalent-method"
 version = "0.1.0"
 description = "Plugin for PyRoll providing Lendl's equivalent rectangle method"
 authors = [
-    "Christoph Renzing <christoph.renzing@imf.tu-freiberg.de>"
+    "Christoph Renzing <christoph.renzing@imf.tu-freiberg.de>",
+    "Max Weiner <max.weiner@imf.tu-freiberg.de>"
 ]
 license = "BSD-3-Clause"
 

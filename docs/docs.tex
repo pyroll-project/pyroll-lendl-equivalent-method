@@ -15,7 +15,7 @@
 
     \maketitle
 
-    This plugin provides the equivalent method after Lendl for calculation of a equivalent rectangle used for spread calculation.
+    This plugin provides the equivalent method after Lendl for calculation of an equivalent rectangle used for spread calculation.
 
 
     \section{Model approach}\label{sec:model-approach}
@@ -23,7 +23,7 @@
     A common approach for groove rolling is to calculate some equivalent rectangular profile to be able to use spread models for flat rolling in groove rolling.
     This method is valid if the groove design is a simple irregular one.
     For this case, the roll pass is characterized by a change in height that varies across the width, with the caliber having more than one axis of symmetry.
-    \textcite{Lendl_1948a, Lendl_1948b, Lendl_1949} proposed a method for calculation of a equivalent rectangle using the incoming profile of the roll pass and the groove used in the pass.
+    \textcite{Lendl_1948a, Lendl_1948b, Lendl_1949} proposed a method for calculation of an equivalent rectangle using the incoming profile of the roll pass and the groove used in the pass.
     The method can be divided into four different steps witch are explained in detail in the following subsections.
 
     \begin{itemize}
@@ -37,7 +37,7 @@
     As for groove and profile contour lines are so called \texttt{LineString} objects provided by the shapely package published by \textcite{shapely2007}.
     For calculation of intersection points between incoming profile and groove the shapely method \texttt{intersection} is used.
     This method returns the points where two lines intersect each other.
-    As an example the following figure~\ref{fig:lendl-intersection-points} shows the intersection points of a incoming round profile and a oval groove.
+    As an example the following figure~\ref{fig:lendl-intersection-points} show's the intersection points of an incoming round profile and an oval groove.
 
     \begin{figure}
         \centering
@@ -88,11 +88,11 @@
 
     The plugin can be loaded under the name \texttt{pyroll\_lendl\_equivalent\_method}.
 
-    An implementation of the \lstinline{} hook on \lstinline{RollPass} is provided,
-    calculating the spread using the equivalent rectangle approach and Wusatowski's model.
-
+    An implementation of the hooks \lstinline{lendl_width}, \lstinline{lendl_initial_area} and \lstinline{lendl_final_area}
+    for calculation the values for $b_L$, $A_{0,L}$ and $A_{1,L}$ is provided on the \lstinline{RollPass}.
     Several additional hooks on \lstinline{RollPass} are defined, which are used for calculation, as listed in \autoref{tab:hookspecs}.
-    For \lstinline{} and \lstinline{} the equations~\ref{eq:} and~\ref{eq:} are implemented.
+    On the \lstinline{RollPass.InProfile} the hook \lstinline{equivalent_rectangle} calculates the corresponding equivalent rectangle for the profile.
+    The same hook can be called on the \lstinline{RollPass.OutProfile} providing the same usability.
 
     \begin{table}
         \centering
@@ -100,19 +100,26 @@
         \label{tab:hookspecs}
         \begin{tabular}{ll}
             \toprule
-            Hook name                                     & Meaning                                \\
+            Hook name                                  & Meaning                                                     \\
             \midrule
-            \texttt{wusatowski\_temperature\_coefficient} & temperature correction coefficient $a$ \\
-            \texttt{wusatowski\_velocity\_coefficient}    & velocity correction coefficient $c$    \\
-            \texttt{wusatowski\_material\_coefficient}    & material correction coefficient $d$    \\
-            \texttt{wusatowski\_friction\_coefficient}    & friction correction coefficient $f$    \\
-            \texttt{wusatowski\_exponent}                 & spread exponent $w$                    \\
+            \texttt{right\_contour}                    & right contour of the profile after rotation                 \\
+            \texttt{left\_contour}                     & left contour of the profile after rotation                  \\
+            \texttt{upper\_left\_intersection\_point}  & upper left intersection point $A$ in~\ref{fig:lendl-areas}  \\
+            \texttt{upper\_right\_intersection\_point} & upper right intersection point $B$ in~\ref{fig:lendl-areas} \\
+            \texttt{lower\_left\_intersection\_point}  & lower left intersection point  $D$ in~\ref{fig:lendl-areas}   \\
+            \texttt{lower\_right\_intersection\_point} & lower right intersection point $C$ in~\ref{fig:lendl-areas} \\
+            \texttt{left\_lendl\_width\_boundary}      & connection line between $A$ and $B$                         \\
+            \texttt{right\_lendl\_width\_boundary}     & connection line between $D$ and $C$                         \\
+            \texttt{lendl\_width}                      & Lendl's width $b_L$                                         \\
+            \texttt{lendl\_initial\_area}              & Lendl's initial area $A_{0,L}$                              \\
+            \texttt{lendl\_final\_area}                & Lendl's width $A_{1,L}$                                     \\
+            \texttt{equivalent\_rectangle}             & Equivalent rectangle of the profile or groove               \\
+
             \bottomrule
         \end{tabular}
     \end{table}
 
     \printbibliography
-
 
 
 \end{document}
