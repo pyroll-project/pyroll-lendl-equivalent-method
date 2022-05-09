@@ -1,41 +1,46 @@
 import math
 
 from shapely.geometry import LineString
-from shapely.affinity import rotate
-from shapely.ops import clip_by_rect
+from shapely.ops import clip_by_rect, unary_union
 
 from pyroll import Profile, RollPass
 from pyroll.core.dimensions import Dimensions
 
 
 @RollPass.InProfile.hookimpl
-def right_contour(roll_pass: RollPass, profile: Profile):
-    return rotate(roll_pass.in_profile.lower_contour_line, roll_pass.in_profile.rotation, (0, 0))
+def intersections(roll_pass: RollPass, profile: Profile):
+    upper_intersections = roll_pass.in_profile.upper_contour_line.intersection(roll_pass.upper_contour_line)
+    lower_intersections = roll_pass.in_profile.lower_contour_line.intersection(roll_pass.lower_contour_line)
 
-
-@RollPass.InProfile.hookimpl
-def left_contour(roll_pass: RollPass, profile: Profile):
-    return rotate(roll_pass.in_profile.upper_contour_line, roll_pass.in_profile.rotation, (0, 0))
+    return unary_union([upper_intersections, lower_intersections])
 
 
 @RollPass.hookimpl
 def upper_left_intersection_point(roll_pass: RollPass):
-    return roll_pass.in_profile.left_contour.intersection(roll_pass.upper_contour_line)
+    for point in roll_pass.in_profile.intersections.geoms:
+        if point.x < 0 < point.y:
+            return point
 
 
 @RollPass.hookimpl
 def upper_right_intersection_point(roll_pass: RollPass):
-    return roll_pass.in_profile.right_contour.intersection(roll_pass.upper_contour_line)
+    for point in roll_pass.in_profile.intersections.geoms:
+        if point.x > 0 and point.y > 0:
+            return point
 
 
 @RollPass.hookimpl
 def lower_right_intersection_point(roll_pass: RollPass):
-    return roll_pass.in_profile.right_contour.intersection(roll_pass.lower_contour_line)
+    for point in roll_pass.in_profile.intersections.geoms:
+        if point.x > 0 > point.y:
+            return point
 
 
 @RollPass.hookimpl
 def lower_left_intersection_point(roll_pass: RollPass):
-    return roll_pass.in_profile.left_contour.intersection(roll_pass.lower_contour_line)
+    for point in roll_pass.in_profile.intersections.geoms:
+        if point.x < 0 and point.y < 0:
+            return point
 
 
 @RollPass.hookimpl
@@ -69,7 +74,7 @@ def lendl_final_area(roll_pass: RollPass):
 
 @RollPass.InProfile.hookimpl(specname="equivalent_rectangle")
 def in_equivalent_rectangle(roll_pass: RollPass, profile: Profile):
-    eq_width = profile.rotated.width
+    eq_width = profile.width
     eq_height = roll_pass.lendl_initial_area / roll_pass.lendl_width
 
     return Dimensions(eq_width, eq_height)

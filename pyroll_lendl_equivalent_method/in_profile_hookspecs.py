@@ -7,9 +7,5 @@ def equivalent_rectangle(roll_pass, profile):
 
 
 @RollPass.InProfile.hookspec
-def left_contour(roll_pass, profile):
-    """"""
-
-@RollPass.InProfile.hookspec
-def right_contour(roll_pass, profile):
-        """"""
+def intersections(roll_pass, profile):
+    """Intersection points between incoming profile and groove"""

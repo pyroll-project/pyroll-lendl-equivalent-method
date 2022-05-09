@@ -10,7 +10,7 @@ license = "BSD-3-Clause"
 
 [tool.poetry.dependencies]
 python = ">= 3.9, <3.11"
-pyroll = "^0.6.0"
+pyroll = "^1.0.0"
 plotly = "^5.7.0"
 Figures = "^0.4.2"
 
