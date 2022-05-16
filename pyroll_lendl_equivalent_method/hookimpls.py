@@ -3,7 +3,7 @@ import math
 from shapely.geometry import LineString
 from shapely.ops import clip_by_rect, unary_union
 
-from pyroll import Profile, RollPass
+from pyroll.core import Profile, RollPass
 from pyroll.core.dimensions import Dimensions
 
 

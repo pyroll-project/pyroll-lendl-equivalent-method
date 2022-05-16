@@ -6,7 +6,7 @@ from shapely.geometry import Point, Polygon
 from shapely.ops import clip_by_rect
 
 from pyroll.ui.reporter import Reporter
-from pyroll import RollPass, Profile
+from pyroll.core import RollPass, Profile
 from pyroll.utils.hookutils import for_units
 
 

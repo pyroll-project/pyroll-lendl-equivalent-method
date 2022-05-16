@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from pyroll import solve
+from pyroll.core import solve
 from pyroll.ui.reporter import Reporter
 
 THIS_DIR = Path(__file__).parent

@@ -1,4 +1,5 @@
-from pyroll import RollPass, Reporter
+from pyroll.core import RollPass
+from pyroll.ui import  Reporter
 from . import in_profile_hookspecs
 from . import out_profile_hookspecs
 from . import roll_pass_hookspecs
