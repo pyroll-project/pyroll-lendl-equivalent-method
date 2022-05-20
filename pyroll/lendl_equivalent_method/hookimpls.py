@@ -4,7 +4,7 @@ from shapely.geometry import LineString
 from shapely.ops import clip_by_rect, unary_union
 
 from pyroll.core import Profile, RollPass
-from pyroll.core.dimensions import Dimensions
+from pyroll.core.shapes import rectangle
 
 
 @RollPass.InProfile.hookimpl
@@ -77,7 +77,7 @@ def in_equivalent_rectangle(roll_pass: RollPass, profile: Profile):
     eq_width = profile.width
     eq_height = roll_pass.lendl_initial_area / roll_pass.lendl_width
 
-    return Dimensions(eq_width, eq_height)
+    return rectangle(eq_width, eq_height)
 
 
 @RollPass.OutProfile.hookimpl(specname="equivalent_rectangle")
@@ -85,4 +85,4 @@ def out_equivalent_rectangle(roll_pass: RollPass, profile: Profile):
     eq_width = profile.width
     eq_height = roll_pass.lendl_final_area / roll_pass.lendl_width
 
-    return Dimensions(eq_width, eq_height)
+    return rectangle(eq_width, eq_height)
