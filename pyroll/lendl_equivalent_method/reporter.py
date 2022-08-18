@@ -57,7 +57,7 @@ def unit_plot(unit: RollPass):
 @for_units(RollPass)
 def unit_properties(unit: RollPass):
     return dict(
-        lendl_width=f"{unit.lendl_width}",
+        lendl_width=f"{unit.lendl_width:.4e}",
         initial_lendl_area=f"{unit.lendl_initial_area}",
         final_lendl_area=f"{unit.lendl_final_area}"
     )
