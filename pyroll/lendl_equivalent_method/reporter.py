@@ -51,3 +51,13 @@ def unit_plot(unit: RollPass):
     plot_lendl_area(ax, unit)
 
     return fig
+
+
+@Reporter.hookimpl
+@for_units(RollPass)
+def unit_properties(unit: RollPass):
+    return dict(
+        lendl_width=f"{unit.lendl_width}",
+        initial_lendl_area=f"{unit.lendl_initial_area}",
+        final_lendl_area=f"{unit.lendl_final_area}"
+    )
