@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyroll-lendl-equivalent-method"
-version = "1.0.1"
+version = "2.0.0b"
 description = "Plugin for PyRoll providing Lendl's equivalent rectangle method"
 authors = [
     "Christoph Renzing <christoph.renzing@imf.tu-freiberg.de>",
