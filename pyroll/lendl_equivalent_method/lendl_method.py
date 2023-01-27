@@ -16,7 +16,7 @@ def out_lendl_section(self: RollPass.OutProfile):
     intersections = intersection(self.roll_pass.in_profile.cross_section, contour)
 
     return Polygon(
-        np.concatenate([ls.coords for ls in intersections])
+        np.concatenate([ls.coords for ls in intersections.geoms])
     )
 
 
@@ -31,9 +31,9 @@ def in_lendl_section(self: RollPass.InProfile):
     return clip_by_rect(self.cross_section, -half_width, -math.inf, half_width, math.inf)
 
 
-@RollPass.lendl_width
+@ThreeRollPass.lendl_width
 def lendl_width_3fold(self: RollPass):
-    i = intersection(self.roll_pass.in_profile.cross_section, self.contour_lines[1])
+    i = intersection(self.in_profile.cross_section, self.contour_lines[1])
     return i.width
 
 
@@ -51,10 +51,7 @@ def clip_3fold(poly: Polygon, roll_pass: ThreeRollPass):
 
 @ThreeRollPass.InProfile.lendl_section
 def in_lendl_section_3fold(self: ThreeRollPass.InProfile):
-    poly = Polygon(
-        np.concatenate([ls.coords for ls in self.cross_section])
-    )
-    return clip_3fold(poly, self.roll_pass)
+    return clip_3fold(self.cross_section, self.roll_pass)
 
 
 @ThreeRollPass.OutProfile.lendl_section
