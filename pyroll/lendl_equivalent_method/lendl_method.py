@@ -64,9 +64,15 @@ def out_lendl_section_3fold(self: ThreeRollPass.OutProfile):
 
 @RollPass.Profile.equivalent_width
 def equivalent_width(self: RollPass.Profile):
-    return self.roll_pass.lendl_width
+    return self.width
 
 
 @RollPass.Profile.equivalent_height
 def equivalent_height(self: RollPass.Profile):
-    return self.lendl_section.area / self.equivalent_width
+    return self.lendl_section.area / self.roll_pass.lendl_width
+
+
+@ThreeRollPass.Profile.equivalent_height
+def equivalent_height(self: RollPass.Profile):
+    return (self.lendl_section.area / 3 + self.roll_pass.lendl_width ** 2
+            * np.sqrt(3) / 12) / self.roll_pass.lendl_width * 2
