@@ -1,19 +1,11 @@
-from pyroll.core import RollPass
-from pyroll.ui import Reporter
-from . import in_profile_hookspecs
-from . import out_profile_hookspecs
-from . import roll_pass_hookspecs
+import importlib.util
 
-RollPass.plugin_manager.add_hookspecs(roll_pass_hookspecs)
-RollPass.InProfile.plugin_manager.add_hookspecs(in_profile_hookspecs)
-RollPass.OutProfile.plugin_manager.add_hookspecs(out_profile_hookspecs)
+from . import lendl_method
 
-from . import hookimpls
+REPORT_INSTALLED = bool(importlib.util.find_spec("pyroll.report"))
 
-RollPass.plugin_manager.register(hookimpls)
-RollPass.InProfile.plugin_manager.register(hookimpls)
-RollPass.OutProfile.plugin_manager.register(hookimpls)
+if REPORT_INSTALLED:
+    from pyroll.report import plugin_manager
+    from . import report
+    plugin_manager.register(report)
 
-from . import reporter
-
-Reporter.plugin_manager.register(reporter)

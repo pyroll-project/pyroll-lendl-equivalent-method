@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyroll-lendl-equivalent-method"
-version = "1.0.1"
+version = "2.0.0b"
 description = "Plugin for PyRoll providing Lendl's equivalent rectangle method"
 authors = [
     "Christoph Renzing <christoph.renzing@imf.tu-freiberg.de>",
@@ -23,14 +23,13 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = ">= 3.9, <3.11"
-pyroll = "^1.0.0"
-plotly = "^5.7.0"
-Figures = "^0.4.2"
+python = ">= 3.9, <3.12"
+pyroll-core = "^2.0.0b"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.0.0"
-pyroll = { git = "https://github.com/pyroll-project/pyroll-core", branch = "main", develop = true }
+#pyroll-core = { git = "file:///home/maxwe/Git/pyroll-core", branch = "three_roll_pass", develop = true }
+#pyroll-report = { git = "file:///run/media/maxwe/USBS-128-2/Git/pyroll-report", branch = "three_roll_pass", develop = true }
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
