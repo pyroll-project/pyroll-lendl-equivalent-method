@@ -2,6 +2,8 @@ import importlib.util
 
 from . import lendl_method
 
+VERSION = "2.0.0b2"
+
 REPORT_INSTALLED = bool(importlib.util.find_spec("pyroll.report"))
 
 if REPORT_INSTALLED:
