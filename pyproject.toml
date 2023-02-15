@@ -18,12 +18,12 @@ classifiers = [
     "Topic :: Scientific/Engineering"
 ]
 
+dynamic = ["version"]
+
 [project.urls]
 Homepage = "https://pyroll-project.github.io"
 Repository = "https://github.com/pyroll-project/pyroll-lendl-equivalent-method"
 Documentation = "https://github.com/pyroll-project/pyroll-lendl-equivalent-method/blob/main/docs/docs.pdf"
-
-dynamic = ["version"]
 
 [build-system]
 requires = ["hatchling"]
