@@ -69,7 +69,7 @@ def equivalent_width(self: RollPass.Profile):
 
 @RollPass.OutProfile.width
 def width(self: RollPass.OutProfile):
-    if self.has_set("equivalent_width"):
+    if self.has_set_or_cached("equivalent_width"):
         return self.equivalent_width
 
 
