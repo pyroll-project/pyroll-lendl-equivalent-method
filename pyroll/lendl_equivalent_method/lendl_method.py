@@ -67,6 +67,12 @@ def equivalent_width(self: RollPass.Profile):
     return self.width
 
 
+@RollPass.OutProfile.width
+def width(self: RollPass.OutProfile):
+    if self.has_set("equivalent_width"):
+        return self.equivalent_width
+
+
 @RollPass.Profile.equivalent_height
 def equivalent_height(self: RollPass.Profile):
     return self.lendl_section.area / self.roll_pass.lendl_width

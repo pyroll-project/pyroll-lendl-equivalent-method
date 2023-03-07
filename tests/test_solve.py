@@ -5,11 +5,16 @@ from pathlib import Path
 from pyroll.core import Profile, Roll, RollPass, Transport, RoundGroove, CircularOvalGroove, PassSequence, root_hooks
 import pyroll.lendl_equivalent_method
 
-root_hooks.add(Profile.equivalent_rectangle)
+root_hooks.add(Profile.equivalent_width)
 
 
 def test_solve(tmp_path: Path, caplog):
-    caplog.set_level(logging.DEBUG, logger="pyroll")
+    caplog.set_level(logging.INFO, logger="pyroll")
+
+    def equivalent_width(self: RollPass.OutProfile):
+        return 1.1 * self.roll_pass.in_profile.equivalent_width
+
+    hf = RollPass.OutProfile.equivalent_width.add_function(equivalent_width)
 
     in_profile = Profile.round(
         diameter=30e-3,
@@ -75,6 +80,8 @@ def test_solve(tmp_path: Path, caplog):
     finally:
         print("\nLog:")
         print(caplog.text)
+
+        RollPass.OutProfile.equivalent_width.remove_function(hf)
 
     try:
         import pyroll.report
