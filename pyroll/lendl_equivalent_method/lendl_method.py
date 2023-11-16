@@ -39,7 +39,7 @@ def lendl_width_3fold(self: RollPass):
 
 def clip_3fold(poly: Polygon, roll_pass: ThreeRollPass):
     half_width = roll_pass.lendl_width / 2
-    poly = clip_by_rect(poly, -half_width, -math.inf, half_width, 0)
+    poly = clip_by_rect(poly, -half_width, 0, half_width, math.inf)
 
     return unary_union(
         [
