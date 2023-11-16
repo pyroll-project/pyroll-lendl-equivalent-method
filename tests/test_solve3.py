@@ -43,7 +43,7 @@ def test_solve3(tmp_path: Path, caplog):
         ),
         ThreeRollPass(
             label="Round II",
-            orientation='AntiY',
+            orientation=180,
             roll=Roll(
                 groove=RoundGroove(
                     r1=3e-3,
