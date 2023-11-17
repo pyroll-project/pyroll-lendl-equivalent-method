@@ -28,6 +28,7 @@ def test_solve(tmp_path: Path, caplog):
     sequence = PassSequence([
         RollPass(
             label="Oval I",
+            orientation="h",
             roll=Roll(
                 groove=CircularOvalGroove(
                     depth=8e-3,
@@ -45,6 +46,7 @@ def test_solve(tmp_path: Path, caplog):
         ),
         RollPass(
             label="Round II",
+            orientation="v",
             roll=Roll(
                 groove=RoundGroove(
                     r1=1e-3,
@@ -62,6 +64,7 @@ def test_solve(tmp_path: Path, caplog):
         ),
         RollPass(
             label="Oval III",
+            orientation="h",
             roll=Roll(
                 groove=CircularOvalGroove(
                     depth=6e-3,
