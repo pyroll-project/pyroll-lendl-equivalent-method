@@ -24,7 +24,7 @@ def test_solve3(tmp_path: Path, caplog):
     sequence = PassSequence([
         ThreeRollPass(
             label="Oval I",
-            orientation='Y',
+            orientation="Y",
             roll=Roll(
                 groove=CircularOvalGroove(
                     depth=8e-3,
@@ -43,7 +43,7 @@ def test_solve3(tmp_path: Path, caplog):
         ),
         ThreeRollPass(
             label="Round II",
-            orientation=180,
+            orientation="AntiY",
             roll=Roll(
                 groove=RoundGroove(
                     r1=3e-3,
