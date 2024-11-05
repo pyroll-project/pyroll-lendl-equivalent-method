@@ -1,14 +1,16 @@
 import math
 
-from pyroll.core import RollPass, Hook, ThreeRollPass
+from pyroll.core import BaseRollPass, RollPass, Hook, ThreeRollPass
 from shapely import intersection, MultiLineString, Polygon, unary_union
 from shapely.affinity import rotate
 from shapely.ops import clip_by_rect
 import numpy as np
 
-RollPass.lendl_width = Hook[float]()
-RollPass.Profile.lendl_section = Hook[float]()
+BaseRollPass.lendl_width = Hook[float]()
+"Width between intersecting point when incoming profile and roll pass contour are overlapped."
 
+BaseRollPass.Profile.lendl_section = Hook[float]()
+"Section build between RollPass and Profile inside Lendl's width."
 
 @RollPass.OutProfile.lendl_section
 def out_lendl_section(self: RollPass.OutProfile):
