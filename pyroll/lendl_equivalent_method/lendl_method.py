@@ -14,8 +14,7 @@ BaseRollPass.Profile.lendl_section = Hook[float]()
 
 @RollPass.OutProfile.lendl_section
 def out_lendl_section(self: RollPass.OutProfile):
-    contour = MultiLineString(self.roll_pass.contour_lines)
-    intersections = intersection(self.roll_pass.in_profile.cross_section, contour)
+    intersections = intersection(self.roll_pass.in_profile.cross_section, self.roll_pass.contour_lines)
 
     return Polygon(
         np.concatenate([ls.coords for ls in intersections.geoms])
@@ -35,7 +34,7 @@ def in_lendl_section(self: RollPass.InProfile):
 
 @ThreeRollPass.lendl_width
 def lendl_width_3fold(self: RollPass):
-    i = intersection(self.in_profile.cross_section, self.contour_lines[1])
+    i = intersection(self.in_profile.cross_section, self.contour_lines.geoms[1])
     return i.width
 
 
@@ -59,7 +58,7 @@ def in_lendl_section_3fold(self: ThreeRollPass.InProfile):
 @ThreeRollPass.OutProfile.lendl_section
 def out_lendl_section_3fold(self: ThreeRollPass.OutProfile):
     poly = Polygon(
-        np.concatenate([ls.coords for ls in self.roll_pass.contour_lines])
+        np.concatenate([ls.coords for ls in self.roll_pass.contour_lines.geoms])
     )
     return clip_3fold(poly, self.roll_pass)
 

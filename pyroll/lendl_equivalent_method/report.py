@@ -1,7 +1,7 @@
 from matplotlib import pyplot as plt
 from pyroll.report import hookimpl
 from pyroll.core import RollPass, ThreeRollPass, Unit
-from shapely import LineString, Polygon
+from shapely import MultiLineString, Polygon
 from shapely.affinity import rotate
 from typing import List
 
@@ -24,13 +24,13 @@ def unit_plot(unit: Unit):
 
         ax.fill(*in_lendl_section_oriented.boundary.xy, color="red", alpha=0.5)
         ax.fill(*out_lendl_section_oriented.boundary.xy, color="blue", alpha=0.5)
-        for cl in contour_line_oriented:
+        for cl in contour_line_oriented.geoms:
             ax.plot(*cl.xy, color="k")
 
         return fig
 
 
-def orient_geometry_to_technology(geom: List[LineString], unit: RollPass):
+def orient_geometry_to_technology(contour_lines: MultiLineString, unit: RollPass):
     orientation = unit.orientation
 
     if isinstance(orientation, str):
@@ -42,8 +42,5 @@ def orient_geometry_to_technology(geom: List[LineString], unit: RollPass):
             orientation = 60
 
     if orientation != 0:
-        if isinstance(geom, List):
-            return [rotate(cl, angle=orientation, origin=(0, 0)) for cl in geom]
-        else:
-            return rotate(geom, angle=orientation, origin=(0, 0))
-    return geom
+        return rotate(contour_lines, angle=orientation, origin=(0, 0))
+    return contour_lines
